@@ -1,10 +1,10 @@
 import React from 'react';
-import {
-  Animated,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
+// import {
+//   Animated,
+//   Platform,
+//   StyleSheet,
+//   View,
+// } from 'react-native';
 
 import ActionSheet from '@expo/react-native-action-sheet';
 import moment from 'moment/min/moment-with-locales.min';

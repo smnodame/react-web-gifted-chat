@@ -1,6 +1,6 @@
 # Gifted Chat
 
-The most complete chat UI for React Native (formerly known as Gifted Messenger).
+Web fork of most complete chat UI for React Native (formerly known as Gifted Messenger).
 
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-1.png)
 ![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png)

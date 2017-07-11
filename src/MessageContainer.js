@@ -3,6 +3,7 @@ import React from 'react';
 import {
   ListView,
   View,
+  ScrollView
 } from 'react-native';
 
 import shallowequal from 'shallowequal';
@@ -96,7 +97,7 @@ export default class MessageContainer extends React.Component {
   }
 
   scrollTo(options) {
-   // this._invertibleScrollViewRef.scrollTo(options);
+    // this._invertibleScrollViewRef.scrollTo(options);
   }
 
   renderRow(message, sectionId, rowId) {
@@ -123,30 +124,38 @@ export default class MessageContainer extends React.Component {
     return <Message {...messageProps}/>;
   }
 
-  // renderScrollComponent(props) {
-  //   const invertibleScrollViewProps = this.props.invertibleScrollViewProps;
-  //   return (
-  //     <InvertibleScrollView
-  //       {...props}
-  //       {...invertibleScrollViewProps}
-  //       ref={component => this._invertibleScrollViewRef = component}
-  //     />
-  //   );
-  // }
+  renderScrollComponent(props) {
+    const invertibleScrollViewProps = this.props.invertibleScrollViewProps;
+    return (
+      <ScrollView
+        {...props}
+        {...invertibleScrollViewProps}
+      />
+    );
+  }
+
 
   render() {
     return (
-      <View ref='container' style={{flex:1}}>
+      <View style={{flex: 1}} onLayout={() => {
+        this._scrollView.scrollToEnd()
+      }
+      }>
         <ListView
           enableEmptySections={true}
           automaticallyAdjustContentInsets={false}
           initialListSize={20}
           pageSize={20}
 
+          ref={component => {
+            if (component) {
+              this._scrollView = component._scrollViewRef
+            }
+          }}
           {...this.props.listViewProps}
-
+          onContentSizeChange={() => this._scrollView.scrollToEnd()}
           dataSource={this.state.dataSource}
-
+          renderScrollComponent={this.renderScrollComponent}
           renderRow={this.renderRow}
           renderHeader={this.renderFooter}
           renderFooter={this.renderLoadEarlier}

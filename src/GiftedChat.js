@@ -3,6 +3,8 @@ import {
   Animated,
   StyleSheet,
   View,
+  Text,
+  TouchableOpacity
 } from 'react-native';
 
 // import ActionSheet from '@expo/react-native-action-sheet';
@@ -277,22 +279,18 @@ class GiftedChat extends React.Component {
   }
 
   renderMessages() {
-    const AnimatedView = this.props.isAnimated === true ? Animated.View : View;
     return (
-      <AnimatedView style={{
+      <View style={{
         height: this.state.messagesContainerHeight,
       }}>
         <MessageContainer
           {...this.props}
-
           invertibleScrollViewProps={this.invertibleScrollViewProps}
-
           messages={this.getMessages()}
-
           ref={component => this._messageContainerRef = component}
         />
         {this.renderChatFooter()}
-      </AnimatedView>
+      </View>
     );
   }
 
@@ -364,9 +362,9 @@ class GiftedChat extends React.Component {
     if (layout.height <= 0) {
       return;
     }
-    this.setMaxHeight(layout.height);
-    const newComposerHeight = MIN_COMPOSER_HEIGHT;
-    const newMessagesContainerHeight = this.getMessagesContainerHeightWithKeyboard(newComposerHeight);
+    this.setMaxHeight(1000);
+    const newComposerHeight = '100%';
+    const newMessagesContainerHeight =newComposerHeight;// this.getMessagesContainerHeightWithKeyboard(newComposerHeight);
     this.setState({
       isInitialized: true,
       text: '',
@@ -376,17 +374,17 @@ class GiftedChat extends React.Component {
   }
 
   onMainViewLayout(e) {
-    // fix an issue when keyboard is dismissing during the initialization
-    const layout = e.nativeEvent.layout;
-    if (this.getMaxHeight() !== layout.height || this.getIsFirstLayout() === true) {
-      this.setMaxHeight(layout.height);
-      this.setState({
-        messagesContainerHeight: this.prepareMessagesContainerHeight(this.getBasicMessagesContainerHeight()),
-      });
-    }
-    if (this.getIsFirstLayout() === true) {
-      this.setIsFirstLayout(false);
-    }
+    // // fix an issue when keyboard is dismissing during the initialization
+    // const layout = e.nativeEvent.layout;
+    // if (this.getMaxHeight() !== layout.height || this.getIsFirstLayout() === true) {
+    //   this.setMaxHeight(layout.height);
+    //   this.setState({
+    //     messagesContainerHeight: this.prepareMessagesContainerHeight(this.getBasicMessagesContainerHeight()),
+    //   });
+    // }
+    // if (this.getIsFirstLayout() === true) {
+    //   this.setIsFirstLayout(false);
+    // }
   }
 
   renderInputToolbar() {
@@ -453,6 +451,7 @@ class GiftedChat extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: '100%'
   },
 });
 

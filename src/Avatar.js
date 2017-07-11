@@ -14,6 +14,7 @@ export default class Avatar extends React.Component {
         avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
         user={this.props.currentMessage.user}
         onPress={() => this.props.onPressAvatar && this.props.onPressAvatar(this.props.currentMessage.user)}
+        onClick={() => this.props.onPressAvatar && this.props.onPressAvatar(this.props.currentMessage.user)}
       />
     );
   }

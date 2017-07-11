@@ -12,12 +12,13 @@ import { isSameDay, isSameUser, warnDeprecated } from './utils';
 
 export default class Day extends React.Component {
   render() {
+    const locale = window.navigator.userLanguage || window.navigator.language;
     if (!isSameDay(this.props.currentMessage, this.props.previousMessage)) {
       return (
         <View style={[styles.container, this.props.containerStyle]}>
           <View style={[styles.wrapper, this.props.wrapperStyle]}>
             <Text style={[styles.text, this.props.textStyle]}>
-              {moment(this.props.currentMessage.createdAt).locale(this.context.getLocale()).format('ll').toUpperCase()}
+              {moment(this.props.currentMessage.createdAt).locale(locale).format('ll').toUpperCase()}
             </Text>
           </View>
         </View>

@@ -150,7 +150,7 @@ module.exports = {
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,
-        include: ['/Users/johniak/Projects/react-web-gifted-chat',paths.appSrc],
+        include: [paths.libDirectory, paths.appSrc],
         loader: require.resolve('babel-loader'),
         options: {
 

@@ -280,8 +280,9 @@ class GiftedChat extends React.Component {
 
   renderMessages() {
     return (
-      <View style={{
+      <div style={{
         height: this.state.messagesContainerHeight,
+        display: 'flex'
       }}>
         <MessageContainer
           {...this.props}
@@ -290,7 +291,7 @@ class GiftedChat extends React.Component {
           ref={component => this._messageContainerRef = component}
         />
         {this.renderChatFooter()}
-      </View>
+      </div>
     );
   }
 
@@ -391,7 +392,6 @@ class GiftedChat extends React.Component {
     const inputToolbarProps = {
       ...this.props,
       text: this.state.text,
-      composerHeight: Math.max(MIN_COMPOSER_HEIGHT, this.state.composerHeight),
       onSend: this.onSend,
       onInputSizeChanged: this.onInputSizeChanged,
       onTextChanged: this.onInputTextChanged,

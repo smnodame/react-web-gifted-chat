@@ -2,8 +2,7 @@
 
 Web fork of most complete chat UI for React Native (formerly known as Gifted Messenger).
 
-![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-1.png)
-![](https://raw.githubusercontent.com/FaridSafi/react-native-gifted-chat/master/screenshots/gifted-chat-2.png)
+![](http://i.imgur.com/X7jLrFz.png)
 
 ## Features
 
@@ -17,11 +16,6 @@ Web fork of most complete chat UI for React Native (formerly known as Gifted Mes
 - Multiline TextInput
 - InputToolbar avoiding keyboard
 
-## Dependency
-
-- Use version `0.2.x` for RN `>= 0.44.0`
-- Use version `0.1.x` for RN `>= 0.40.0`
-- Use version `0.0.10` for RN `< 0.40.0`
 
 ## Installation
 

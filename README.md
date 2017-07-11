@@ -19,8 +19,8 @@ Web fork of most complete chat UI for React Native (formerly known as Gifted Mes
 
 ## Installation
 
-- Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-gifted-chat --save`
-- Using [Yarn](https://yarnpkg.com/): `yarn add react-native-gifted-chat`
+- Using [npm](https://www.npmjs.com/#getting-started): `npm install react-web-gifted-chat --save`
+- Using [Yarn](https://yarnpkg.com/): `yarn add react-web-gifted-chat`
 
 ## Example
 
@@ -134,24 +134,7 @@ e.g.
 - **`onInputTextChanged`** _(Function)_ - Callback when the input text changes
 - **`maxInputLength`** _(Integer)_ - Max message composer TextInput length
 
-## Notes for Android
-
-- Make sure you have `android:windowSoftInputMode="adjustResize"` in your `AndroidManifest.xml`:
-
-    ```xml
-    <activity
-      android:name=".MainActivity"
-      android:label="@string/app_name"
-      android:windowSoftInputMode="adjustResize"
-      android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
-    ```
-
-- If you plan to use `GiftedChat` inside a `Modal`, see [#200](https://github.com/FaridSafi/react-native-gifted-chat/issues/200).
-
 ## License
 
 - [MIT](LICENSE)
 
-## Author
-
-Feel free to ask me questions on Twitter [@FaridSafi](https://www.twitter.com/FaridSafi)!

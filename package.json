@@ -1,6 +1,6 @@
 {
   "name": "react-web-gifted-chat",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "The most complete chat UI for React Web",
   "main": "index.js",
   "repository": {
@@ -22,7 +22,7 @@
   "homepage": "https://github.com/stermedia/react-web-gifted-chat#readme",
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
-    "compile": "export BABEL_ENV='production' && rm -rf ./dist && mkdir dist && babel index.js src/* -d dist --ignore **/__tests__ && cp package.json dist/"
+    "compile": "export BABEL_ENV='production' && rm -rf ./dist && mkdir dist && babel index.js src/* -d dist --ignore **/__tests__ && cp package.json dist/ && cp README.md dist/"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

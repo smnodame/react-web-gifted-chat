@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import ParsedText from 'react-native-parsed-text';
-import Communications from 'react-native-communications';
 
 export default class MessageText extends React.Component {
   constructor(props) {
@@ -34,19 +33,19 @@ export default class MessageText extends React.Component {
       cancelButtonIndex,
     },
     (buttonIndex) => {
-      switch (buttonIndex) {
-        case 0:
-          Communications.phonecall(phone, true);
-          break;
-        case 1:
-          Communications.text(phone);
-          break;
-      }
+      // switch (buttonIndex) {
+      //   case 0:
+      //     Communications.phonecall(phone, true);
+      //     break;
+      //   case 1:
+      //     Communications.text(phone);
+      //     break;
+      // }
     });
   }
 
   onEmailPress(email) {
-    Communications.email(email, null, null, null, null);
+    //Communications.email(email, null, null, null, null);
   }
 
   render() {

@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 
 import shallowequal from 'shallowequal';
-import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import md5 from 'md5';
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
@@ -97,7 +96,7 @@ export default class MessageContainer extends React.Component {
   }
 
   scrollTo(options) {
-    this._invertibleScrollViewRef.scrollTo(options);
+   // this._invertibleScrollViewRef.scrollTo(options);
   }
 
   renderRow(message, sectionId, rowId) {
@@ -124,16 +123,16 @@ export default class MessageContainer extends React.Component {
     return <Message {...messageProps}/>;
   }
 
-  renderScrollComponent(props) {
-    const invertibleScrollViewProps = this.props.invertibleScrollViewProps;
-    return (
-      <InvertibleScrollView
-        {...props}
-        {...invertibleScrollViewProps}
-        ref={component => this._invertibleScrollViewRef = component}
-      />
-    );
-  }
+  // renderScrollComponent(props) {
+  //   const invertibleScrollViewProps = this.props.invertibleScrollViewProps;
+  //   return (
+  //     <InvertibleScrollView
+  //       {...props}
+  //       {...invertibleScrollViewProps}
+  //       ref={component => this._invertibleScrollViewRef = component}
+  //     />
+  //   );
+  // }
 
   render() {
     return (
@@ -151,7 +150,6 @@ export default class MessageContainer extends React.Component {
           renderRow={this.renderRow}
           renderHeader={this.renderFooter}
           renderFooter={this.renderLoadEarlier}
-          renderScrollComponent={this.renderScrollComponent}
         />
       </View>
     );

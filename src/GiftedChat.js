@@ -1,12 +1,11 @@
 import React from 'react';
-// import {
-//   Animated,
-//   Platform,
-//   StyleSheet,
-//   View,
-// } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  View,
+} from 'react-native';
 
-import ActionSheet from '@expo/react-native-action-sheet';
+// import ActionSheet from '@expo/react-native-action-sheet';
 import moment from 'moment/min/moment-with-locales.min';
 import uuid from 'uuid';
 
@@ -30,10 +29,7 @@ import GiftedChatInteractionManager from './GiftedChatInteractionManager';
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
 // TODO move these values to Constants.js (also with used colors #b2b2b2)
-const MIN_COMPOSER_HEIGHT = Platform.select({
-  ios: 33,
-  android: 41,
-});
+const MIN_COMPOSER_HEIGHT = 41
 const MAX_COMPOSER_HEIGHT = 100;
 
 class GiftedChat extends React.Component {
@@ -92,12 +88,12 @@ class GiftedChat extends React.Component {
     return currentMessages.concat(messages);
   }
 
-  getChildContext() {
-    return {
-      actionSheet: () => this._actionSheetRef,
-      getLocale: this.getLocale,
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     actionSheet: () => this._actionSheetRef,
+  //     getLocale: this.getLocale,
+  //   };
+  // }
 
   componentWillMount() {
     this.setIsMounted(true);
@@ -150,18 +146,11 @@ class GiftedChat extends React.Component {
   }
 
   setKeyboardHeight(height) {
-    this._keyboardHeight = height;
+    this._keyboardHeight = 0;
   }
 
   getKeyboardHeight() {
-    if (Platform.OS === 'android') {
-      // For android: on-screen keyboard resized main container and has own height.
-      // @see https://developer.android.com/training/keyboard-input/visibility.html
-      // So for calculate the messages container height ignore keyboard height.
-      return 0;
-    } else {
-      return this._keyboardHeight;
-    }
+    return 0;
   }
 
   setBottomOffset(value) {
@@ -278,7 +267,9 @@ class GiftedChat extends React.Component {
   }
 
   scrollToBottom(animated = true) {
-    if (this._messageContainerRef === null) { return }
+    if (this._messageContainerRef === null) {
+      return
+    }
     this._messageContainerRef.scrollTo({
       y: 0,
       animated,
@@ -445,12 +436,10 @@ class GiftedChat extends React.Component {
   render() {
     if (this.state.isInitialized === true) {
       return (
-        <ActionSheet ref={component => this._actionSheetRef = component}>
-          <View style={styles.container} onLayout={this.onMainViewLayout}>
-            {this.renderMessages()}
-            {this.renderInputToolbar()}
-          </View>
-        </ActionSheet>
+        <View style={styles.container} onLayout={this.onMainViewLayout}>
+          {this.renderMessages()}
+          {this.renderInputToolbar()}
+        </View>
       );
     }
     return (
@@ -468,7 +457,6 @@ const styles = StyleSheet.create({
 });
 
 GiftedChat.childContextTypes = {
-  actionSheet: React.PropTypes.func,
   getLocale: React.PropTypes.func,
 };
 
@@ -480,14 +468,8 @@ GiftedChat.defaultProps = {
   onLoadEarlier: () => {
   },
   locale: null,
-  isAnimated: Platform.select({
-    ios: true,
-    android: false,
-  }),
-  keyboardShouldPersistTaps: Platform.select({
-    ios: 'never',
-    android: 'always',
-  }),
+  isAnimated: false,
+  keyboardShouldPersistTaps: 'never',
   renderAccessory: null,
   renderActions: null,
   renderAvatar: undefined,

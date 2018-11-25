@@ -7,6 +7,7 @@ import {
 import PropTypes from 'prop-types';
 
 export default class Composer extends React.Component {
+
   onChange(e) {
     const contentSize = e.nativeEvent.contentSize;
     if (!this.contentSize) {
@@ -30,23 +31,25 @@ export default class Composer extends React.Component {
         multiline={this.props.multiline}
 
         onContentSizeChange={(e) => this.onChange(e)}
-        onChangeText={text => this.onChangeText(text)}
+        onChangeText={(text) => this.onChangeText(text)}
 
-        style={[styles.textInput, this.props.textInputStyle, {height: this.props.composerHeight}]}
+        style={[styles.textInput, this.props.textInputStyle, { height: this.props.composerHeight }]}
 
         value={this.props.text}
         accessibilityLabel={this.props.text || this.props.placeholder}
-        enablesReturnKeyAutomatically={true}
+        enablesReturnKeyAutomatically
         underlineColorAndroid="transparent"
         {...this.props.textInputProps}
       />
     );
   }
+
 }
 
 const styles = StyleSheet.create({
   textInput: {
     flex: 1,
+    minHeight: 40,
     marginLeft: 10,
     fontSize: 16,
     lineHeight: 16,

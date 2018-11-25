@@ -138,3 +138,17 @@ e.g.
 
 - [MIT](LICENSE)
 
+## Notes for local development
+You need to have facebook watchman installed
+
+
+1. `cd example`
+2. `yarn`
+4. `yarn start`
+5. `yarn run sync` in another terminal window (doesn't matter where)
+
+If you have any issues, you can clear your watches using `watchman watch-del-all` and try again.
+
+## Author
+
+Feel free to ask me qustion on Twitter [@JanRomaniak](https://www.twitter.com/JanRomaniak)!

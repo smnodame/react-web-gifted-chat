@@ -151,4 +151,4 @@ If you have any issues, you can clear your watches using `watchman watch-del-all
 
 ## Author
 
-Feel free to ask me qustion on Twitter [@JanRomaniak](https://www.twitter.com/JanRomaniak)!
+Feel free to ask me question on Twitter [@JanRomaniak](https://www.twitter.com/JanRomaniak)!

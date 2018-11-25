@@ -6,7 +6,7 @@ import {
   View,
   ViewPropTypes,
 } from 'react-native';
-
+import PropTypes from 'prop-types';
 export default class Actions extends React.Component {
   constructor(props) {
     super(props);
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 });
 
 Actions.contextTypes = {
-  actionSheet: React.PropTypes.func,
+  actionSheet: PropTypes.func,
 };
 
 Actions.defaultProps = {
@@ -100,11 +100,11 @@ Actions.defaultProps = {
 };
 
 Actions.propTypes = {
-  onSend: React.PropTypes.func,
-  options: React.PropTypes.object,
-  optionTintColor: React.PropTypes.string,
-  icon: React.PropTypes.func,
-  onPressActionButton: React.PropTypes.func,
+  onSend: PropTypes.func,
+  options: PropTypes.object,
+  optionTintColor: PropTypes.string,
+  icon: PropTypes.func,
+  onPressActionButton: PropTypes.func,
   containerStyle: ViewPropTypes.style,
   iconTextStyle: Text.propTypes.style,
 };

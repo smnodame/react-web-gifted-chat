@@ -56,7 +56,7 @@ const styles = {
 };
 
 Time.contextTypes = {
-  getLocale: React.PropTypes.func,
+  getLocale: PropTypes.func,
 };
 
 Time.defaultProps = {

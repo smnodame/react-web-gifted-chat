@@ -6,8 +6,8 @@ import {
   View,
   ViewPropTypes,
 } from 'react-native';
-
-import ParsedText from 'react-native-parsed-text';
+import PropTypes from 'prop-types';
+import ParsedText from './ParsedText';
 
 export default class MessageText extends React.Component {
   constructor(props) {
@@ -45,7 +45,7 @@ export default class MessageText extends React.Component {
   }
 
   onEmailPress(email) {
-    //Communications.email(email, null, null, null, null);
+    // Communications.email(email, null, null, null, null);
   }
 
   render() {
@@ -54,9 +54,9 @@ export default class MessageText extends React.Component {
         <ParsedText
           style={[styles[this.props.position].text, this.props.textStyle[this.props.position]]}
           parse={[
-            {type: 'url', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onUrlPress},
-            {type: 'phone', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onPhonePress},
-            {type: 'email', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onEmailPress},
+            { type: 'url', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onUrlPress },
+            { type: 'phone', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onPhonePress },
+            { type: 'email', style: StyleSheet.flatten([styles[this.props.position].link, this.props.linkStyle[this.props.position]]), onPress: this.onEmailPress },
           ]}
         >
           {this.props.currentMessage.text}
@@ -103,7 +103,7 @@ const styles = {
 };
 
 MessageText.contextTypes = {
-  actionSheet: React.PropTypes.func,
+  actionSheet: PropTypes.func,
 };
 
 MessageText.defaultProps = {
@@ -117,17 +117,17 @@ MessageText.defaultProps = {
 };
 
 MessageText.propTypes = {
-  position: React.PropTypes.oneOf(['left', 'right']),
-  currentMessage: React.PropTypes.object,
-  containerStyle: React.PropTypes.shape({
+  position: PropTypes.oneOf(['left', 'right']),
+  currentMessage: PropTypes.object,
+  containerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
   }),
-  textStyle: React.PropTypes.shape({
+  textStyle: PropTypes.shape({
     left: Text.propTypes.style,
     right: Text.propTypes.style,
   }),
-  linkStyle: React.PropTypes.shape({
+  linkStyle: PropTypes.shape({
     left: Text.propTypes.style,
     right: Text.propTypes.style,
   }),

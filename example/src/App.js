@@ -24,7 +24,7 @@ function generateMessage(text, index, image) {
       _id: index % 3 == 0 ? 1 : 2,
       name: 'Johniak',
     },
-    image
+    image,
   }
 }
 

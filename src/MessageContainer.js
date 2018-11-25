@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {createRef} from 'react';
 
 import {
   ListView,
   View,
-  ScrollView
+  ScrollView,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 import shallowequal from 'shallowequal';
 import md5 from 'md5';
@@ -12,6 +13,7 @@ import LoadEarlier from './LoadEarlier';
 import Message from './Message';
 
 export default class MessageContainer extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -19,22 +21,22 @@ export default class MessageContainer extends React.Component {
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
     this.renderScrollComponent = this.renderScrollComponent.bind(this);
-
+    this._scrollView = createRef();
     const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => {
         return r1.hash !== r2.hash;
-      }
+      },
     });
 
     const messagesData = this.prepareMessages(props.messages);
     this.state = {
-      dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys)
+      dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
     };
   }
 
   prepareMessages(messages) {
     return {
-      keys: messages.map(m => m._id),
+      keys: messages.map((m) => m._id),
       blob: messages.reduce((o, m, i) => {
         const previousMessage = messages[i + 1] || {};
         const nextMessage = messages[i - 1] || {};
@@ -44,10 +46,10 @@ export default class MessageContainer extends React.Component {
           ...m,
           previousMessage,
           nextMessage,
-          hash: md5(toHash)
+          hash: md5(toHash),
         };
         return o;
-      }, {})
+      }, {}),
     };
   }
 
@@ -67,7 +69,7 @@ export default class MessageContainer extends React.Component {
     }
     const messagesData = this.prepareMessages(nextProps.messages);
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys)
+      dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
     });
   }
 
@@ -90,7 +92,7 @@ export default class MessageContainer extends React.Component {
         return this.props.renderLoadEarlier(loadEarlierProps);
       }
       return (
-        <LoadEarlier {...loadEarlierProps}/>
+        <LoadEarlier {...loadEarlierProps} />
       );
     }
     return null;
@@ -121,7 +123,7 @@ export default class MessageContainer extends React.Component {
     if (this.props.renderMessage) {
       return this.props.renderMessage(messageProps);
     }
-    return <Message {...messageProps}/>;
+    return <Message {...messageProps} />;
   }
 
   renderScrollComponent(props) {
@@ -137,23 +139,22 @@ export default class MessageContainer extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1}} onLayout={() => {
-        this._scrollView.scrollToEnd()
+      <View
+        style={{ flex: 1 }}
+        onLayout={() => {
+          this._scrollView.current.scrollToEnd();
+        }
       }
-      }>
+      >
         <ListView
-          enableEmptySections={true}
+          enableEmptySections
           automaticallyAdjustContentInsets={false}
           initialListSize={20}
           pageSize={20}
 
-          ref={component => {
-            if (component) {
-              this._scrollView = component._scrollViewRef
-            }
-          }}
+          ref={this._scrollView}
           {...this.props.listViewProps}
-          onContentSizeChange={() => this._scrollView.scrollToEnd()}
+          onContentSizeChange={() => this._scrollView.current.scrollToEnd()}
           dataSource={this.state.dataSource}
           renderScrollComponent={this.renderScrollComponent}
           renderRow={this.renderRow}
@@ -163,6 +164,7 @@ export default class MessageContainer extends React.Component {
       </View>
     );
   }
+
 }
 
 MessageContainer.defaultProps = {
@@ -176,10 +178,10 @@ MessageContainer.defaultProps = {
 };
 
 MessageContainer.propTypes = {
-  messages: React.PropTypes.array,
-  user: React.PropTypes.object,
-  renderFooter: React.PropTypes.func,
-  renderMessage: React.PropTypes.func,
-  onLoadEarlier: React.PropTypes.func,
-  listViewProps: React.PropTypes.object,
+  messages: PropTypes.array,
+  user: PropTypes.object,
+  renderFooter: PropTypes.func,
+  renderMessage: PropTypes.func,
+  onLoadEarlier: PropTypes.func,
+  listViewProps: PropTypes.object,
 };

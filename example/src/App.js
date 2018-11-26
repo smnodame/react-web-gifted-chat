@@ -51,16 +51,41 @@ class App extends Component {
     console.log(this.state.messages)
     return (
       <div className="App" style={styles.container}>
-        <GiftedChat user={{_id: 1,}}
-                    messages={this.state.messages}
-                    onSend={this.onSend}/>
+        <div style={styles.conversationList}>
+        Converstions
+        </div>
+        <div style={styles.chat}>
+          <GiftedChat user={{_id: 1,}}
+                      messages={this.state.messages}
+                      onSend={this.onSend}/>
+          </div>
+        <div style={styles.converationDetails}>
+        Conversation details
+        </div>
       </div>
     );
   }
 }
 const styles = {
   container: {
+    display:'flex',
+    flexDirection: 'row',
     height: '100vh'
+  },
+  conversationList: {
+    display:'flex',
+    flex: 1,
+  },
+  chat: {
+    display:'flex',
+    flex: 3,
+    borderWidth: '1px',
+    borderColor: '#ccc',
+    borderStyle: 'solid'
+  },
+  converationDetails: {
+    display:'flex',
+    flex: 1,
   }
 }
 

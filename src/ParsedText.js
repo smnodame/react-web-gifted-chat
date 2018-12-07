@@ -34,7 +34,6 @@ class ParsedText extends React.Component {
 
   static defaultProps = {
     parse: null,
-    childrenProps: {},
   };
 
   setNativeProps(nativeProps) {
@@ -60,12 +59,12 @@ class ParsedText extends React.Component {
     if (typeof this.props.children !== 'string') { return this.props.children; }
 
     const textExtraction = new TextExtraction(this.props.children, this.getPatterns());
-
+    const  childrenProps  = this.props.childrenProps||{};
     return textExtraction.parse().map((props, index) => {
       return (
         <ReactNative.Text
           key={`parsedText-${index}`}
-          {...this.props.childrenProps}
+          {...childrenProps}
           {...props}
         />
       );

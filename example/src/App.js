@@ -56,7 +56,7 @@ class App extends Component {
         </div>
         <div style={styles.chat}>
           <GiftedChat user={{_id: 1,}}
-                      messages={this.state.messages}
+                      messages={this.state.messages.slice().reverse()}
                       onSend={this.onSend}/>
           </div>
         <div style={styles.converationDetails}>

@@ -1,6 +1,6 @@
 {
   "name": "react-web-gifted-chat",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The most complete chat UI for React Web",
   "main": "dist/index.js",
   "repository": {
@@ -22,25 +22,29 @@
   "homepage": "https://github.com/stermedia/react-web-gifted-chat#readme",
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
-    "compile": "export BABEL_ENV='production' && rm -rf ./dist && mkdir dist && babel src --out-dir dist --ignore **/__tests__ "
+    "compile": "export BABEL_ENV='production' && rm -rf ./dist && mkdir dist &&  rollup -c -i src/index.js -o dist/index.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "7.1.0",
+    "@babel/runtime": "7.1.5",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
     "babel-loader": "8.0.4",
     "babel-plugin-named-asset-import": "^0.2.3",
     "babel-preset-react-app": "^6.1.0",
-    "babel-runtime": "6.26.0",
     "eslint": "5.9.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-cooperka": "0.3.1",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-react": "7.11.1",
-    "eslint-plugin-react-native": "3.5.0"
+    "eslint-plugin-react-native": "3.5.0",
+    "rollup": "^0.67.4",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^3.4.0"
   },
   "dependencies": {
     "md5": "2.2.1",

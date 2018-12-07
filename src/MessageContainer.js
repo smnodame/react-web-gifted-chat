@@ -1,9 +1,10 @@
 import React, {createRef} from 'react';
 
 import {
-  ListView,
+  FlatList,
   View,
   ScrollView,
+  StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -21,17 +22,10 @@ export default class MessageContainer extends React.Component {
     this.renderFooter = this.renderFooter.bind(this);
     this.renderLoadEarlier = this.renderLoadEarlier.bind(this);
     this.renderScrollComponent = this.renderScrollComponent.bind(this);
-    this._scrollView = createRef();
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => {
-        return r1.hash !== r2.hash;
-      },
-    });
+    this.flatListRef = createRef();
+    
 
     const messagesData = this.prepareMessages(props.messages);
-    this.state = {
-      dataSource: dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
-    };
   }
 
   prepareMessages(messages) {
@@ -63,16 +57,6 @@ export default class MessageContainer extends React.Component {
     return false;
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.messages === nextProps.messages) {
-      return;
-    }
-    const messagesData = this.prepareMessages(nextProps.messages);
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(messagesData.blob, messagesData.keys),
-    });
-  }
-
   renderFooter() {
     if (this.props.renderFooter) {
       const footerProps = {
@@ -102,7 +86,8 @@ export default class MessageContainer extends React.Component {
     // this._invertibleScrollViewRef.scrollTo(options);
   }
 
-  renderRow(message, sectionId, rowId) {
+  renderRow({ item, index }) {
+    const message = item;
     if (!message._id && message._id !== 0) {
       console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
     }
@@ -142,30 +127,45 @@ export default class MessageContainer extends React.Component {
       <View
         style={{ flex: 1 }}
         onLayout={() => {
-          this._scrollView.current.scrollToEnd();
+          //this.flatListRef.current.scrollTo({x: 0, y: 0, animated: true});
         }
       }
       >
-        <ListView
+        <FlatList
+          ref={this.flatListRef}
+          keyExtractor={(item) => `${item._id}`}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
-          initialListSize={20}
-          pageSize={20}
-
-          ref={this._scrollView}
+          inverted={this.props.inverted}
+          data={this.props.messages}
+          style={styles.listStyle}
+          contentContainerStyle={styles.contentContainerStyle}
+          renderItem={this.renderRow}
+          {...this.props.invertibleScrollViewProps}
+          ListFooterComponent={this.renderHeaderWrapper}
+          ListHeaderComponent={this.renderFooter}
           {...this.props.listViewProps}
-          onContentSizeChange={() => this._scrollView.current.scrollToEnd()}
-          dataSource={this.state.dataSource}
-          renderScrollComponent={this.renderScrollComponent}
-          renderRow={this.renderRow}
-          renderHeader={this.renderFooter}
-          renderFooter={this.renderLoadEarlier}
         />
       </View>
     );
   }
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  contentContainerStyle: {
+    justifyContent: 'flex-end',
+  },
+  headerWrapper: {
+    flex: 1,
+  },
+  listStyle: {
+    flex: 1,
+  },
+});
 
 MessageContainer.defaultProps = {
   messages: [],

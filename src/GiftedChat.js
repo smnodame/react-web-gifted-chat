@@ -456,10 +456,6 @@ const styles = StyleSheet.create({
   },
 });
 
-GiftedChat.childContextTypes = {
-  getLocale: PropTypes.func,
-};
-
 GiftedChat.defaultProps = {
   messages: [],
   onSend: () => {

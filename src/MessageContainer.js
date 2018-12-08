@@ -30,13 +30,13 @@ export default class MessageContainer extends React.Component {
 
   prepareMessages(messages) {
     return {
-      keys: messages.map((m) => m._id),
+      keys: messages.map((m) => m.id),
       blob: messages.reduce((o, m, i) => {
         const previousMessage = messages[i + 1] || {};
         const nextMessage = messages[i - 1] || {};
         // add next and previous messages to hash to ensure updates
-        const toHash = JSON.stringify(m) + previousMessage._id + nextMessage._id;
-        o[m._id] = {
+        const toHash = JSON.stringify(m) + previousMessage.id + nextMessage.id;
+        o[m.id] = {
           ...m,
           previousMessage,
           nextMessage,
@@ -88,8 +88,8 @@ export default class MessageContainer extends React.Component {
 
   renderRow({ item, index }) {
     const message = item;
-    if (!message._id && message._id !== 0) {
-      console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(message));
+    if (!message.id && message.id !== 0) {
+      console.warn('GiftedChat: `id` is missing for message', JSON.stringify(message));
     }
     if (!message.user) {
       console.warn('GiftedChat: `user` is missing for message', JSON.stringify(message));
@@ -98,11 +98,11 @@ export default class MessageContainer extends React.Component {
 
     const messageProps = {
       ...this.props,
-      key: message._id,
+      key: message.id,
       currentMessage: message,
       previousMessage: message.previousMessage,
       nextMessage: message.nextMessage,
-      position: message.user._id === this.props.user._id ? 'right' : 'left',
+      position: message.user.id === this.props.user.id ? 'right' : 'left',
     };
 
     if (this.props.renderMessage) {
@@ -133,7 +133,7 @@ export default class MessageContainer extends React.Component {
       >
         <FlatList
           ref={this.flatListRef}
-          keyExtractor={(item) => `${item._id}`}
+          keyExtractor={(item) => `${item.id}`}
           enableEmptySections
           automaticallyAdjustContentInsets={false}
           inverted={this.props.inverted}

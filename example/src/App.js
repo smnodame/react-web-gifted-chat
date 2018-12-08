@@ -17,11 +17,11 @@ messages.push(generateMessage(`Goood`, 2, 'http://img2.dmty.pl//uploads/201010/1
 
 function generateMessage(text, index, image) {
   return {
-    _id: Math.round(Math.random() * 1000000),
+    id: Math.round(Math.random() * 1000000),
     text: text,
     createdAt: new Date(),
     user: {
-      _id: index % 3 == 0 ? 1 : 2,
+      id: index % 3 == 0 ? 1 : 2,
       name: 'Johniak',
     },
     image,
@@ -55,7 +55,7 @@ class App extends Component {
         Converstions
         </div>
         <div style={styles.chat}>
-          <GiftedChat user={{_id: 1,}}
+          <GiftedChat user={{id: 1,}}
                       messages={this.state.messages.slice().reverse()}
                       onSend={this.onSend}/>
           </div>

@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import Avatar from './Avatar';
 import Bubble from './Bubble';
 import Day from './Day';
+import SystemMessage from './SystemMessage';
 
 import {isSameUser, isSameDay} from './utils';
 
@@ -42,6 +43,14 @@ export default class Message extends React.Component {
     return <Bubble {...bubbleProps}/>;
   }
 
+  renderSystemMessage() {
+    const systemMessageProps = this.getInnerComponentProps();
+    if (this.props.renderSystemMessage) {
+        return this.props.renderSystemMessage(systemMessageProps);
+    }
+    return <SystemMessage {...systemMessageProps} />;
+  }
+
   renderAvatar() {
     if (this.props.user.id !== this.props.currentMessage.user.id) {
       const avatarProps = this.getInnerComponentProps();
@@ -54,13 +63,17 @@ export default class Message extends React.Component {
     return (
       <View>
         {this.renderDay()}
-        <View style={[styles[this.props.position].container, {
-          marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
-        }, this.props.containerStyle[this.props.position]]}>
-          {this.props.position === 'left' ? this.renderAvatar() : null}
-          {this.renderBubble()}
-          {this.props.position === 'right' ? this.renderAvatar() : null}
-        </View>
+        {this.props.currentMessage.system ? (
+                this.renderSystemMessage()
+        ) : (
+            <View style={[styles[this.props.position].container, {
+                marginBottom: isSameUser(this.props.currentMessage, this.props.nextMessage) ? 2 : 10,
+            }, this.props.containerStyle[this.props.position]]}>
+                {this.props.position === 'left' ? this.renderAvatar() : null}
+                {this.renderBubble()}
+                {this.props.position === 'right' ? this.renderAvatar() : null}
+            </View>
+        )}
       </View>
     );
   }
